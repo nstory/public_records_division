@@ -142,6 +142,29 @@ class PublicRecordsDivision
     end
   end
 
+  def files_to_text
+    Dir.glob("appeal_files/**/*")
+      .select { |f| /\.pdf$/i =~ f }
+      .each do |pdf_file|
+      txt_file = pdf_file.sub("appeal_files", "appeal_txt").sub(/pdf$/i, "txt")
+      unless File.exist?(txt_file)
+        txt_dir = File.dirname(txt_file)
+        text = Pdf.new(pdf_file).to_text
+        system("mkdir", "-p", txt_dir)
+        IO.write(txt_file, text)
+      end
+    end
+  end
+
+  def appeals_json
+    Appeal.all.each do |ap|
+      # puts ap.detail.to_h.to_json
+      puts ap.detail.to_h.merge(
+        files: ap.files.map { |f| { path: f.path.sub("appeal_files/", ""), text: f.text} }
+      ).to_json
+    end
+  end
+
   def console
     binding.pry
   end

@@ -2,7 +2,7 @@ AppealDetail = Struct.new(
   :case_type, :case_subtype, :status, :case_no, :requester, :custodian,
   :req_rec_date, :resp_prov_date, :fees, :petitions, :comply, :date_opened,
   :date_closed, :reconsider_open_date, :reconsider_close_date, :in_cam_open_date,
-  :in_cam_close_date, :request_to_court,
+  :in_cam_close_date, :request_to_court, :appeal_no,
   keyword_init: true
 ) do
 
@@ -35,7 +35,18 @@ AppealDetail = Struct.new(
         key = MAPPING[e['id']]
         h[key] = e.text.strip if key
       end
+      h[:appeal_no] = parse_appeal_no(doc)
       new(h)
     end
+  end
+
+  private
+  def self.parse_appeal_no(doc)
+    doc.css("form").each do |form|
+      if /(?<=AppealNo=)(.*)/ =~ form[:action]
+        return URI.decode($1)
+      end
+    end
+    nil
   end
 end
