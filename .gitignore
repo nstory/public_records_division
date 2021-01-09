@@ -1,2 +1,7 @@
 /request_details
 /request_tables
+/input/*
+!/input/.keep
+
+/output/*
+!/output/.keep
