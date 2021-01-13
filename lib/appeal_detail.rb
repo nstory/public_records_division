@@ -27,6 +27,10 @@ AppealDetail = Struct.new(
     "lblReqToCourt" => :request_to_court,
   }
 
+  def url
+    "https://www.sec.state.ma.us/AppealsWeb/AppealStatusDetail.aspx?AppealNo=#{URI.encode_www_form_component(appeal_no)}"
+  end
+
   def self.all(input_dir)
     Dir.glob("#{input_dir}/*.json").lazy.map do |f|
       from_file(f)

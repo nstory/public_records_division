@@ -53,6 +53,20 @@ class PublicRecordsDivision
     ).call
   end
 
+  def generate_appeals_csv
+    GenerateAppealsCsv.new(
+      details_dir: ENV.fetch("APPEAL_DETAILS_DIR")
+    ).call
+  end
+
+  def generate_determinations_zip
+    GenerateDeterminationsZip.new(
+      determinations_zip: ENV.fetch("DETERMINATIONS_ZIP"),
+      details_dir: ENV.fetch("APPEAL_DETAILS_DIR"),
+      downloads_dir: ENV.fetch('APPEAL_DOWNLOADS_DIR')
+    ).call
+  end
+
   def decisions_2020
     ids = AppealDetail.all(ENV.fetch("APPEAL_DETAILS_DIR"))
       .select { |ad| /^2020/ =~ ad.case_no }
