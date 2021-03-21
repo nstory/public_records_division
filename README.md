@@ -2,14 +2,16 @@
 
 Scraper for the [Public Records Appeals Database](https://www.sec.state.ma.us/AppealsWeb/AppealsStatus.aspx) maintained by the Secretary of the Commonwealth of Massachusetts.
 
-## HOW TO BUILD
-Everything is run using `make`. Run `make all` to run all the tasks.
+You probably want to check out our web interface to this data: [Appeals — The Woke Windows Project](https://www.wokewindows.org/appeals).
 
-* `input/` stores the pages and files downloaded from the Appeals Database
+## HOW TO BUILD
+Everything is run using `make`. Run `make all` to run all the tasks. WARNING: if you haven't run this before, building will download ~1.5 GB of data from [sec.state.ma.us](https://www.sec.state.ma.us/)
+
+* `input/` stores the pages and files downloaded from the Appeals Database website
 * `output/` stores files generated from the data in `input/`
 
 ## CHALLENGES
-There were two challenging aspects to implementing this crawler:
+There were two challenging aspects to implementing this scraper:
 
 The [www.sec.state.ma.us](https://www.sec.state.ma.us/) website is fronted by the [Imperva Incapsula](https://en.wikipedia.org/wiki/Incapsula) content delivery network (CDN). Incapsula attempts to block website scrapers (or "bots") from accessing a protected site
 

@@ -7,7 +7,7 @@ export DECISIONS_2020_FILE=output/decisions_2020.zip
 export APPEALS_CSV_FILE=output/appeals.csv
 export DETERMINATIONS_ZIP=output/determinations.zip
 
-.PHONY: $(APPEAL_YEARS_DIR) $(APPEAL_DETAILS_DIR) $(APPEAL_DOWNLOADS_DIR) $(APPEAL_TEXT_DIR) $(APPEALS_JSON_FILE) $(DECISIONS_2020_FILE) $(APPEALS_CSV_FILE) $(DETERMINATIONS_ZIP) upload-downloads upload-appeals-json
+.PHONY: $(APPEAL_YEARS_DIR) $(APPEAL_DETAILS_DIR) $(APPEAL_DOWNLOADS_DIR) $(APPEAL_TEXT_DIR) $(APPEALS_JSON_FILE) $(DECISIONS_2020_FILE) $(APPEALS_CSV_FILE) $(DETERMINATIONS_ZIP) upload-downloads upload-appeals-json upload-appeals-csv upload-all
 
 all: $(APPEAL_YEARS_DIR) $(APPEAL_DETAILS_DIR) $(APPEAL_DOWNLOADS_DIR) $(APPEAL_TEXT_DIR) $(APPEALS_JSON_FILE) $(APPEALS_CSV_FILE) $(DETERMINATIONS_ZIP)
 
@@ -17,11 +17,16 @@ clean:
 clean-years:
 	rm -f $(APPEAL_YEARS_DIR)/*.html
 
+upload-all: upload-downloads upload-appeals-json upload-appeals-json
+
 upload-downloads:
 	cd $(APPEAL_DOWNLOADS_DIR) && aws s3 sync ./ 's3://wokewindows-data/appeals/' --acl public-read
 
+upload-appeals-csv:
+	aws s3 cp $(APPEALS_CSV_FILE) "s3://wokewindows-data/" --acl public-read
+
 upload-appeals-json:
-	aws s3 cp $(APPEALS_JSON_FILE) "s3://wokewindows-data/"
+	aws s3 cp $(APPEALS_JSON_FILE) "s3://wokewindows-data/" --acl public-read
 
 $(DECISIONS_2020_FILE):
 	ruby lib/public_records_division.rb decisions_2020
