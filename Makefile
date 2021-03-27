@@ -17,7 +17,7 @@ clean:
 clean-years:
 	rm -f $(APPEAL_YEARS_DIR)/*.html
 
-upload-all: upload-downloads upload-appeals-json upload-appeals-json
+upload-all: upload-downloads upload-appeals-json
 
 upload-downloads:
 	cd $(APPEAL_DOWNLOADS_DIR) && aws s3 sync ./ 's3://wokewindows-data/appeals/' --acl public-read
