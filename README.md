@@ -4,6 +4,13 @@ Scraper for the [Public Records Appeals Database](https://www.sec.state.ma.us/Ap
 
 You probably want to check out our web interface to this data: [Appeals — The Woke Windows Project](https://www.wokewindows.org/appeals).
 
+## DOWNLOAD THE DATA
+If you just want to browse this data, I suggest using [the web interface](https://www.wokewindows.org/appeals). If you want to do more analysis, you'll want to check out these files:
+
+* [appeals.jsonl.gz](https://wokewindows-data.s3.amazonaws.com/appeals.jsonl.gz) &mdash; [JSON Lines](https://jsonlines.org/) format data of all appeals
+* [appeals.csv](https://wokewindows-data.s3.amazonaws.com/appeals.csv) &mdash; CSV format data of all appeals
+* [determinations.zip](https://wokewindows-data.s3.amazonaws.com/determinations.zip) &mdash; large (~1.1 GB) file containing all determinations (these are PDF files)
+
 ## HOW TO BUILD
 Everything is run using `make`. Run `make all` to run all the tasks. WARNING: if you haven't run this before, `make all` will download ~1.5 GB of data from [sec.state.ma.us](https://www.sec.state.ma.us/)
 
