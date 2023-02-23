@@ -9,3 +9,5 @@ gem "nokogiri"
 gem "selenium-webdriver", "~> 3.142.7"
 gem 'webdrivers'
 gem "pry"
+
+gem "matrix", "~> 0.4.2"

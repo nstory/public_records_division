@@ -55,7 +55,7 @@ AppealDetail = Struct.new(
   def self.parse_appeal_no(doc)
     doc.css("form").each do |form|
       if /(?<=AppealNo=)(.*)/ =~ form[:action]
-        return URI.decode($1)
+        return URI.decode_www_form_component($1)
       end
     end
     nil
